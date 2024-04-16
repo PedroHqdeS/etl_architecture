@@ -1,14 +1,17 @@
 import pandas as pd
-from pyspark.sql import SparkSession
+from connectors.csv_connector import CsvConnector
 
-spark = SparkSession.builder.appName("Teste").getOrCreate()
+connector = CsvConnector(app_name="Teste")
 
 _options = {
     "header": "true",
     "delimiter": ";"
 }
-df = spark.read.format("csv").options(**_options).load("./csv_test.csv")
+input_path = "datasets/csv_test.csv"
+output_path = "data_lake/file.csv"
+
+df = connector._extract_data(path=input_path, **_options)
 
 df.show()
 
-spark.stop()
+connector._load_data(dataframe=df, path=output_path)
