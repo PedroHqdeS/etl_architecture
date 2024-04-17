@@ -11,7 +11,11 @@ class FileFormatConnector(ABC):
         self._file_format = None
 
     def _extract_data(self, path: str, **kwargs) -> DataFrame:
-        df = self._spark_session.read.format(self._file_format).options(**kwargs).load(path)
+        df = (self._spark_session
+                .read
+                .format(self._file_format)
+                .options(**kwargs)
+                .load(path))
         return df
 
     @abstractmethod
