@@ -1,4 +1,4 @@
-from pipelines.data_lake_layer_path import DataLakeLayerPath
+from layers.data_lake_layer_path import DataLakeLayerPath
 
 class BronzeLayerPath(DataLakeLayerPath):
     def __init__(self, parameters: dict):
@@ -10,10 +10,5 @@ class BronzeLayerPath(DataLakeLayerPath):
                 .strftime("%Y/%m/%d")
         )
         entity = self._layer_path_params["entity"]
-        main_entity = self._layer_path_params.get("main_entity", None)
-        aux_main_entity = entity if main_entity is None else main_entity
-        path = (
-            f"bronze/{aux_main_entity}/" +
-            f"{execution_time}/{entity}"
-        )
+        path = f"bronze/{entity}/{execution_time}"
         return path
