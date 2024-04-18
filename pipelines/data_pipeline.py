@@ -12,7 +12,10 @@ class DataPipeline(ABC):
         self._target_layer = kwargs["target_layer"]
 
     def extract(self) -> DataFrame:
-        return self._source_connector.extract_data()
+        dataframe = self._source_connector.extract_data(
+            path=self._source_layer.get_file_path()
+        )
+        return dataframe
 
     def transform(self, dataframe: DataFrame) -> DataFrame:
         return dataframe
@@ -25,5 +28,8 @@ class DataPipeline(ABC):
 
     def start_ingestion(self) -> None:
         dataframe = self.extract()
-        dataframe = self.transform(dataframe=dataframe)
-        self.load(dataframe=dataframe)
+        if not dataframe.isEmpty():
+            dataframe = self.transform(dataframe=dataframe)
+            self.load(dataframe=dataframe)
+        else:
+            print("DATA FRAME VAZIOOOOOOOO")

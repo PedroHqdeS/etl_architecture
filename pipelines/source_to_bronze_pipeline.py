@@ -14,7 +14,7 @@ class SourceToBronzePipeline(DataPipeline):
             source_connector=source_connector,
             source_layer=None,
             target_connector=target_connector,
-            target_layer=BronzeLayerPath()
+            target_layer=bronze_path
         )
 
     def extract(self) -> DataFrame:

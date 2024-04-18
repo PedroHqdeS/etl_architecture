@@ -1,10 +1,13 @@
 import logging
 from abc import ABC, abstractmethod
 
+from utils.data_lake_utils import get_url
+
 class DataLakeLayerPath(ABC):
     def __init__(self, parameters: dict):
         self._logger = logging.getLogger(__name__)
         self._layer_path_params = parameters
+        self._lake_root_url = get_url()
         self._file_path = self._build_file_path()
 
     @abstractmethod

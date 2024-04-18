@@ -1,33 +1,31 @@
 from datetime import datetime
+from pipelines.source_to_bronze_pipeline import SourceToBronzePipeline
 from layers.bronze_layer_path import BronzeLayerPath
-from layers.silver_layer_path import SilverLayerPath
-from layers.gold_layer_path import GoldLayerPath
 
-# connector = CsvConnector(app_name="Teste")
-#
-# _options = {
-#     "header": "true",
-#     "delimiter": ";"
-# }
-# input_path = "datasets/csv_test.csv"
-# output_path = "data_lake/file.csv"
-#
-# df = connector._extract_data(path=input_path, **_options)
-#
-# df.show()
-#
-# connector._load_data(dataframe=df, path=output_path)
+from connectors.csv_connector import CsvConnector
 
+from connectors.local_source import LocalSource
+
+import os
+
+# Obter o valor da variável de ambiente SPARK_HOME
+spark_home = os.environ.get('SPARK_HOME')
+
+print(spark_home)
+
+
+local_source = LocalSource()
+csv = CsvConnector()
 params = {
-    "entity": "orders",
+    "entity": "entity",
     "execution_time": datetime.now()
 }
+bronze_layer = BronzeLayerPath(parameters=params)
 
-bronze = BronzeLayerPath(parameters=params)
-print(bronze.get_file_path())
+source_to_bronze = SourceToBronzePipeline(
+    source_connector=local_source,
+    bronze_path=bronze_layer,
+    target_connector=csv
+)
 
-silver = SilverLayerPath(parameters=params)
-print(silver.get_file_path())
-
-gold = GoldLayerPath(parameters=params)
-print(gold.get_file_path())
+source_to_bronze.start_ingestion()

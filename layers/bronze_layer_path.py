@@ -10,5 +10,5 @@ class BronzeLayerPath(DataLakeLayerPath):
                 .strftime("%Y/%m/%d")
         )
         entity = self._layer_path_params["entity"]
-        path = f"bronze/{entity}/{execution_time}"
+        path = f"{self._lake_root_url}bronze/{entity}/{execution_time}"
         return path

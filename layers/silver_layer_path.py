@@ -6,5 +6,5 @@ class SilverLayerPath(DataLakeLayerPath):
 
     def _build_file_path(self) -> str:
         entity = self._layer_path_params["entity"]
-        path = f"silver/{entity}"
+        path = f"{self._lake_root_url}silver/{entity}"
         return path
