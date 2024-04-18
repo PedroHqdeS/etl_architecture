@@ -10,14 +10,10 @@ class FileFormatConnector(ABC):
         self._logger = logging.getLogger(__name__)
         self._file_format = None
 
-    def _extract_data(self, path: str, **kwargs) -> DataFrame:
-        df = (self._spark_session
-                .read
-                .format(self._file_format)
-                .options(**kwargs)
-                .load(path))
-        return df
+    @abstractmethod
+    def extract_data(self) -> DataFrame:
+        pass
 
     @abstractmethod
-    def _load_data(self):
+    def load_data(self) -> None:
         pass
