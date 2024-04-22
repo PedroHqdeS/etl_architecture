@@ -8,7 +8,7 @@ class LocalSource(ExternalSource):
         super().__init__(credentials={})
 
     def connect(self) -> str:
-        url = "etl_arch/datasets/"
+        url = "./datasets/"
         return url
 
     def extract_data(self) -> DataFrame:

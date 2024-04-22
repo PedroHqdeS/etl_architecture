@@ -1,11 +1,10 @@
-import logging
-from abc import ABC, abstractmethod
-
 from pyspark.sql import DataFrame
 
-class DataPipeline(ABC):
+from utils.logging_utils import get_logger
+
+class DataPipeline:
     def __init__(self, **kwargs):
-        self._logger = logging.getLogger(__name__)
+        self._logger = get_logger(name=__name__)
         self._source_connector = kwargs["source_connector"]
         self._source_layer = kwargs["source_layer"]
         self._target_connector = kwargs["target_connector"]
@@ -31,5 +30,3 @@ class DataPipeline(ABC):
         if not dataframe.isEmpty():
             dataframe = self.transform(dataframe=dataframe)
             self.load(dataframe=dataframe)
-        else:
-            print("DATA FRAME VAZIOOOOOOOO")

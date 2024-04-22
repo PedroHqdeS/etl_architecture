@@ -1,17 +1,23 @@
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.types import StructType
-import logging
+
+from utils.logging_utils import get_logger
 
 def start_spark_session(app_name: str) -> SparkSession:
-    spark = SparkSession.builder.appName(app_name).getOrCreate()
+    spark = (SparkSession
+                .builder
+                .appName(app_name)
+                .master("local")
+                .getOrCreate())
     return spark
 
 def read_spark_dataframe(path: str,
                           spark_session: SparkSession,
                           file_format: str,
                           **kwargs) -> DataFrame:
-    logger = logging.getLogger(__name__)
+    logger = get_logger(name=__name__)
     try:
+        logger.info(msg=f"Extractiong data from '{path}'")
         dataframe = (spark_session
                         .read
                         .format(file_format)

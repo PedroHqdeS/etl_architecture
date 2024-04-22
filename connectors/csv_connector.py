@@ -1,5 +1,6 @@
 from connectors.file_format_connector import FileFormatConnector
 from utils.spark_utils import start_spark_session, read_spark_dataframe
+from utils.data_lake_utils import verify_if_directory_existis
 
 from pyspark.sql import DataFrame
 
@@ -14,7 +15,6 @@ class CsvConnector(FileFormatConnector):
             "header": True
         }
         spark = start_spark_session(app_name="CsvConnector")
-        self._logger.info(f"Extracting data from '{path}' ...")
         dataframe = read_spark_dataframe(
             path=path,
             spark_session=spark,
@@ -23,9 +23,11 @@ class CsvConnector(FileFormatConnector):
         return dataframe
 
     def load_data(self, dataframe: DataFrame, path: str) -> None:
+        verify_if_directory_existis(dir=path)
         dataframe.toPandas().to_csv(
-            path,
+            path + "\data.csv",
             sep=";",
             encoding="utf-8",
-            index=False
+            index=False,
+            mode="w"
         )

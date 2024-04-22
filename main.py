@@ -6,14 +6,6 @@ from connectors.csv_connector import CsvConnector
 
 from connectors.local_source import LocalSource
 
-import os
-
-# Obter o valor da variável de ambiente SPARK_HOME
-spark_home = os.environ.get('SPARK_HOME')
-
-print(spark_home)
-
-
 local_source = LocalSource()
 csv = CsvConnector()
 params = {

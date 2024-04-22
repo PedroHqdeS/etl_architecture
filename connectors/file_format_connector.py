@@ -1,11 +1,12 @@
-import logging
 from abc import ABC, abstractmethod
 
 from pyspark.sql import DataFrame
 
+from utils.logging_utils import get_logger
+
 class FileFormatConnector(ABC):
     def __init__(self):
-        self._logger = logging.getLogger(__name__)
+        self._logger = get_logger(name=__name__)
         self._file_format = None
 
     @abstractmethod
