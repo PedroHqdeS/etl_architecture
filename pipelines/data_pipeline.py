@@ -27,6 +27,5 @@ class DataPipeline:
 
     def start_ingestion(self) -> None:
         dataframe = self.extract()
-        if not dataframe.isEmpty():
-            dataframe = self.transform(dataframe=dataframe)
-            self.load(dataframe=dataframe)
+        dataframe = self.transform(dataframe=dataframe)
+        self.load(dataframe=dataframe)

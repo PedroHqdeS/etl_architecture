@@ -8,11 +8,11 @@ class LocalSource(ExternalSource):
         super().__init__(credentials={})
 
     def connect(self) -> str:
-        url = "./datasets/"
+        url = "./datasets/base_csv.csv"
         return url
 
     def extract_data(self) -> DataFrame:
-        path = self.connect() + "base_csv.csv"
+        path = self.connect()
         csv = CsvConnector()
         dataframe = csv.extract_data(path=path)
         return dataframe

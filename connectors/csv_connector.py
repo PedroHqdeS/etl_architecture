@@ -16,16 +16,17 @@ class CsvConnector(FileFormatConnector):
         }
         spark = start_spark_session(app_name="CsvConnector")
         dataframe = read_spark_dataframe(
-            path=path,
+            path=path + "/data.csv",
             spark_session=spark,
             file_format=self._file_format,
             **params)
+        dataframe.show()
         return dataframe
 
     def load_data(self, dataframe: DataFrame, path: str) -> None:
         verify_if_directory_existis(dir=path)
         dataframe.toPandas().to_csv(
-            path + "\data.csv",
+            path + "/data.csv",
             sep=";",
             encoding="utf-8",
             index=False,
