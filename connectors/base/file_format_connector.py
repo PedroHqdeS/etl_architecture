@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-
-from pyspark.sql import DataFrame
+import polars as pl
 
 from utils.logging_utils import get_logger
+
 
 class FileFormatConnector(ABC):
     def __init__(self):
@@ -10,9 +10,9 @@ class FileFormatConnector(ABC):
         self._file_format = None
 
     @abstractmethod
-    def extract_data(self, path: str) -> DataFrame:
+    def extract_data(self, path: str) -> pl.DataFrame:
         pass
 
     @abstractmethod
-    def load_data(self, dataframe: DataFrame, path: str) -> None:
+    def load_data(self, dataframe: pl.DataFrame, path: str) -> None:
         pass

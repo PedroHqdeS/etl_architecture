@@ -1,9 +1,10 @@
+import polars as pl
+
 from pipelines.data_pipeline import DataPipeline
-from connectors.external_source import ExternalSource
-from connectors.file_format_connector import FileFormatConnector
+from connectors.base.external_source import ExternalSource
+from connectors.base.file_format_connector import FileFormatConnector
 from layers.bronze_layer_path import BronzeLayerPath
 
-from pyspark.sql import DataFrame
 
 class SourceToBronzePipeline(DataPipeline):
     def __init__(self,
@@ -17,5 +18,5 @@ class SourceToBronzePipeline(DataPipeline):
             target_layer=bronze_path
         )
 
-    def extract(self) -> DataFrame:
+    def extract(self) -> pl.DataFrame:
         return self._source_connector.extract_data()

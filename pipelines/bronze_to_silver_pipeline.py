@@ -1,13 +1,13 @@
 from datetime import datetime
-
-from pyspark.sql import DataFrame
-from pyspark.sql.functions import expr, lit
+from uuid import uuid4
+import polars as pl
 
 from pipelines.data_pipeline import DataPipeline
-from connectors.file_format_connector import FileFormatConnector
+from connectors.base.file_format_connector import FileFormatConnector
 from connectors.delta_connector import DeltaConnector
 from layers.bronze_layer_path import BronzeLayerPath
 from layers.silver_layer_path import SilverLayerPath
+
 
 class BronzeToSilverPipeline(DataPipeline):
     def __init__(self,
@@ -22,24 +22,15 @@ class BronzeToSilverPipeline(DataPipeline):
             target_layer=silver_path
         )
 
-    def transform(self, dataframe: DataFrame) -> DataFrame:
-        execution_time = datetime.now()
-        dataframe = (
-            dataframe
-                .withColumn(
-                    "surrogate_key",
-                    expr("uuid()"))
-                .withColumn(
-                    "data_lake_load_at",
-                    lit(execution_time))
-                .withColumn(
-                    "year",
-                    lit(execution_time.strftime(format="%Y")))
-                .withColumn(
-                    "month",
-                    lit(execution_time.strftime(format="%m")))
-                .withColumn(
-                    "day",
-                    lit(execution_time.strftime(format="%d"))))
-        dataframe.show()
-        return dataframe
+    def transform(self, dataframe: pl.DataFrame) -> pl.DataFrame:
+        if not dataframe.is_empty():
+            execution_time = datetime.now()
+            surrogate_keys = [str(uuid4()) for _ in range(len(dataframe))]
+            dataframe = dataframe.with_columns([
+                pl.Series(name="surrogate_key", values=surrogate_keys),
+                pl.lit(execution_time).alias("data_lake_load_at"),
+                pl.lit(execution_time.strftime(format="%Y")).alias("year"),
+                pl.lit(execution_time.strftime(format="%m")).alias("month"),
+                pl.lit(execution_time.strftime(format="%d")).alias("day")
+            ])
+            return dataframe

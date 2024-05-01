@@ -5,6 +5,7 @@ from pyspark.sql.types import StructType
 
 from utils.logging_utils import get_logger
 
+
 def start_spark_session(app_name: str) -> SparkSession:
     spark = (SparkSession
                 .builder
@@ -12,6 +13,7 @@ def start_spark_session(app_name: str) -> SparkSession:
                 .master("local")
                 .getOrCreate())
     return spark
+
 
 def read_spark_dataframe(path: str,
                           spark_session: SparkSession,
@@ -40,6 +42,7 @@ def read_spark_dataframe(path: str,
         else:
             logger.error(msg=e)
             raise
+
 
 def write_spark_dataframe(dataframe: DataFrame,
                           path: str,

@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-
-from pyspark.sql import DataFrame
+import polars as pl
 
 from utils.logging_utils import get_logger
+
 
 class ExternalSource(ABC):
     def __init__(self, credentials: dict):
@@ -14,5 +14,5 @@ class ExternalSource(ABC):
         pass
 
     @abstractmethod
-    def extract_data(self) -> DataFrame:
+    def extract_data(self) -> pl.DataFrame:
         pass

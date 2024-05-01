@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-
 from utils.data_lake_utils import get_url
-
 from utils.logging_utils import get_logger
+
 
 class DataLakeLayerPath(ABC):
     def __init__(self, parameters: dict):

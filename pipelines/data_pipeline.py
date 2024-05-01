@@ -1,6 +1,7 @@
-from pyspark.sql import DataFrame
+import polars as pl
 
 from utils.logging_utils import get_logger
+
 
 class DataPipeline:
     def __init__(self, **kwargs):
@@ -10,16 +11,16 @@ class DataPipeline:
         self._target_connector = kwargs["target_connector"]
         self._target_layer = kwargs["target_layer"]
 
-    def extract(self) -> DataFrame:
+    def extract(self) -> pl.DataFrame:
         dataframe = self._source_connector.extract_data(
             path=self._source_layer.get_file_path()
         )
         return dataframe
 
-    def transform(self, dataframe: DataFrame) -> DataFrame:
+    def transform(self, dataframe: pl.DataFrame) -> pl.DataFrame:
         return dataframe
 
-    def load(self, dataframe: DataFrame) -> None:
+    def load(self, dataframe: pl.DataFrame) -> None:
         self._target_connector.load_data(
             dataframe=dataframe,
             path=self._target_layer.get_file_path()

@@ -1,5 +1,6 @@
 from layers.data_lake_layer_path import DataLakeLayerPath
 
+
 class GoldLayerPath(DataLakeLayerPath):
     def __init__(self, parameters: dict):
         super().__init__(parameters=parameters)
