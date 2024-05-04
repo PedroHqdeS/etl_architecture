@@ -1,5 +1,4 @@
 from connectors.base.file_format_connector import FileFormatConnector
-from utils.spark_utils import read_spark_dataframe, write_spark_dataframe
 from utils.data_lake_utils import verify_if_directory_exists
 
 import polars as pl
@@ -8,24 +7,36 @@ from typing import List
 
 from deltalake import DeltaTable
 
+from datetime import datetime
+
 
 class DeltaConnector(FileFormatConnector):
-    def __init__(self, options: dict=None):
+    def __init__(self, partition_dict: dict=None):
         super().__init__()
         self._file_format = "delta"
-        self._options = options
+        self._partition_dict = partition_dict
+
+    def _get_partitions(self):
+        partition = []
+        for key, value in self._partition_dict.items():
+            if value != "*":
+                partition.append((key, "=", value))
+        print(partition)
+        return partition
 
     def extract_data(self, path: str) -> pl.DataFrame:
-        dataframe = pl.read_delta(
-            source=path,
-            pyarrow_options=self._options
+        dataframe = pl.from_arrow(
+            DeltaTable(table_uri=path).to_pyarrow_table(
+                partitions=self._get_partitions()
+            )
         )
         return dataframe
 
     def load_data(self, dataframe: pl.DataFrame, path: str) -> None:
-        # verify_if_directory_exists(dir=path)
-        # dataframe.partition_by(by=self.)
         dataframe.write_delta(
             target=path,
             mode="overwrite",
-            delta_write_options={"schema_mode": "overwrite"})
+            delta_write_options={
+                "schema_mode": "overwrite",
+                "partition_by": list(self._partition_dict.keys())
+            })
