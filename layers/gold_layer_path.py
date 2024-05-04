@@ -1,4 +1,4 @@
-from layers.data_lake_layer_path import DataLakeLayerPath
+from layers.base.data_lake_layer_path import DataLakeLayerPath
 
 
 class GoldLayerPath(DataLakeLayerPath):

@@ -1,5 +1,4 @@
 import polars as pl
-
 from connectors.base.external_source import ExternalSource
 from connectors.csv_connector import CsvConnector
 

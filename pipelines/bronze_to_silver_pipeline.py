@@ -1,12 +1,11 @@
 from datetime import datetime
 from uuid import uuid4
 import polars as pl
-
-from pipelines.data_pipeline import DataPipeline
 from connectors.base.file_format_connector import FileFormatConnector
 from connectors.delta_connector import DeltaConnector
 from layers.bronze_layer_path import BronzeLayerPath
 from layers.silver_layer_path import SilverLayerPath
+from pipelines.base.data_pipeline import DataPipeline
 
 
 class BronzeToSilverPipeline(DataPipeline):

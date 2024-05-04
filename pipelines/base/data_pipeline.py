@@ -1,5 +1,4 @@
 import polars as pl
-
 from utils.logging_utils import get_logger
 
 

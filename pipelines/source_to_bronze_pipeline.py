@@ -1,9 +1,8 @@
 import polars as pl
-
-from pipelines.data_pipeline import DataPipeline
 from connectors.base.external_source import ExternalSource
 from connectors.base.file_format_connector import FileFormatConnector
 from layers.bronze_layer_path import BronzeLayerPath
+from pipelines.base.data_pipeline import DataPipeline
 
 
 class SourceToBronzePipeline(DataPipeline):

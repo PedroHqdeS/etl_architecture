@@ -1,13 +1,6 @@
-from connectors.base.file_format_connector import FileFormatConnector
-from utils.data_lake_utils import verify_if_directory_exists
-
 import polars as pl
-
-from typing import List
-
 from deltalake import DeltaTable
-
-from datetime import datetime
+from connectors.base.file_format_connector import FileFormatConnector
 
 
 class DeltaConnector(FileFormatConnector):

@@ -1,5 +1,4 @@
 import polars as pl
-
 from connectors.base.file_format_connector import FileFormatConnector
 from utils.data_lake_utils import verify_if_directory_exists
 
