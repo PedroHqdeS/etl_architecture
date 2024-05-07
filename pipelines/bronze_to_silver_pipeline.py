@@ -32,4 +32,4 @@ class BronzeToSilverPipeline(DataPipeline):
                 pl.lit(execution_time.strftime(format="%m")).alias("month"),
                 pl.lit(execution_time.strftime(format="%d")).alias("day")
             ])
-            return dataframe
+        return dataframe

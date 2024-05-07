@@ -16,12 +16,13 @@ class CsvConnector(FileFormatConnector):
                 separator=";"
             )
             self._logger.info(msg=f"Data extracted with success.")
-        except FileNotFoundError as e:
-            self._logger.warn(msg=f"'{path}' does not exist.")
-            dataframe = pl.DataFrame(data=[])
         except Exception as e:
-            self._logger.error(msg=e)
-            raise
+            if "no matching files found" in e.__str__():
+                self._logger.warn(msg=f"'{path}' does not exist.")
+                dataframe = pl.DataFrame(data=[])
+            else:
+                self._logger.error(msg=e)
+                raise
         return dataframe
 
     def load_data(self, dataframe: pl.DataFrame, path: str) -> None:

@@ -27,9 +27,9 @@ source_to_bronze.start_ingestion()
 ##############################################
 delta = DeltaConnector(
     partition_dict={
-        "ano": "*",
-        "mes": "*",
-        "dia": "2"
+        "year": "*",
+        "month": "*",
+        "day": "*"
     }
 )
 
