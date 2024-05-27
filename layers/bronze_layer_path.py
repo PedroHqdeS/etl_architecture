@@ -6,10 +6,10 @@ class BronzeLayerPath(DataLakeLayerPath):
         super().__init__(parameters=parameters)
 
     def _build_file_path(self) -> str:
-        execution_time = (
-            self._layer_path_params["execution_time"]
+        processing_date = (
+            self._layer_path_params["processing_date"]
                 .strftime("%Y/%m/%d")
         )
         entity = self._layer_path_params["entity"]
-        path = f"{self._lake_root_url}bronze/{entity}/{execution_time}"
+        path = f"{self._lake_root_url}bronze/{entity}/{processing_date}"
         return path

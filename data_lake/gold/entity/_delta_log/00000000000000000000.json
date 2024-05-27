@@ -1,0 +1,55 @@
+{
+  "protocol": {
+    "minReaderVersion": 3,
+    "minWriterVersion": 7,
+    "readerFeatures": [
+      "timestampNtz"
+    ],
+    "writerFeatures": [
+      "timestampNtz"
+    ]
+  }
+}
+{
+  "metaData": {
+    "id": "7b4b3fb8-1c94-4e13-9ffe-51e62f92d18e",
+    "name": null,
+    "description": null,
+    "format": {
+      "provider": "parquet",
+      "options": {}
+    },
+    "schemaString": "{\"type\":\"struct\",\"fields\":[{\"name\":\"id\",\"type\":\"long\",\"nullable\":true,\"metadata\":{}},{\"name\":\"order_description\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"quantity\",\"type\":\"byte\",\"nullable\":true,\"metadata\":{}},{\"name\":\"status\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"created_at\",\"type\":\"timestamp_ntz\",\"nullable\":true,\"metadata\":{}},{\"name\":\"updated_at\",\"type\":\"timestamp_ntz\",\"nullable\":true,\"metadata\":{}},{\"name\":\"surrogate_key\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"data_lake_load_at\",\"type\":\"timestamp_ntz\",\"nullable\":true,\"metadata\":{}},{\"name\":\"year\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"month\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"day\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+    "partitionColumns": [],
+    "createdTime": 1716808272555,
+    "configuration": {}
+  }
+}
+{
+  "add": {
+    "path": "0-c98c7d81-9c23-4ecb-ac90-2d5785860e0b-0.parquet",
+    "partitionValues": {},
+    "size": 4602,
+    "modificationTime": 1716808272553,
+    "dataChange": true,
+    "stats": "{\"numRecords\": 5, \"minValues\": {\"id\": 10, \"order_description\": \"Beer A 1l\", \"quantity\": 5, \"status\": \"Delivered\", \"created_at\": \"2024-02-01T13:30:00\", \"updated_at\": \"2024-02-01T14:30:12\", \"surrogate_key\": \"0800fb84-824a-4ce8-95ce-f402b13d6dad\", \"data_lake_load_at\": \"2024-05-27T08:11:12.516559\", \"year\": \"2024\", \"month\": \"02\", \"day\": \"01\"}, \"maxValues\": {\"id\": 18, \"order_description\": \"Sparkling water 300ml\", \"quantity\": 24, \"status\": \"Processing\", \"created_at\": \"2024-02-01T14:20:00\", \"updated_at\": \"2024-02-01T14:45:00\", \"surrogate_key\": \"decf0c0d-bcd2-44cc-a592-90559e6528d0\", \"data_lake_load_at\": \"2024-05-27T08:11:12.516559\", \"year\": \"2024\", \"month\": \"02\", \"day\": \"01\"}, \"nullCount\": {\"id\": 0, \"order_description\": 0, \"quantity\": 0, \"status\": 0, \"created_at\": 0, \"updated_at\": 0, \"surrogate_key\": 0, \"data_lake_load_at\": 0, \"year\": 0, \"month\": 0, \"day\": 0}}",
+    "tags": null,
+    "deletionVector": null,
+    "baseRowId": null,
+    "defaultRowCommitVersion": null,
+    "clusteringProvider": null
+  }
+}
+{
+  "commitInfo": {
+    "timestamp": 1716808272555,
+    "operation": "CREATE TABLE",
+    "operationParameters": {
+      "metadata": "{\"configuration\":{},\"createdTime\":1716808272555,\"description\":null,\"format\":{\"options\":{},\"provider\":\"parquet\"},\"id\":\"7b4b3fb8-1c94-4e13-9ffe-51e62f92d18e\",\"name\":null,\"partitionColumns\":[],\"schemaString\":\"{\\\"type\\\":\\\"struct\\\",\\\"fields\\\":[{\\\"name\\\":\\\"id\\\",\\\"type\\\":\\\"long\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"order_description\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"quantity\\\",\\\"type\\\":\\\"byte\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"status\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"created_at\\\",\\\"type\\\":\\\"timestamp_ntz\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"updated_at\\\",\\\"type\\\":\\\"timestamp_ntz\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"surrogate_key\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"data_lake_load_at\\\",\\\"type\\\":\\\"timestamp_ntz\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"year\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"month\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"day\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}}]}\"}",
+      "mode": "ErrorIfExists",
+      "protocol": "{\"minReaderVersion\":3,\"minWriterVersion\":7,\"readerFeatures\":[\"timestampNtz\"],\"writerFeatures\":[\"timestampNtz\"]}",
+      "location": "file:///C:/Users/souza/DataProjects/EngineeringProjects/etl_architecture/data_lake/gold/entity"
+    },
+    "clientVersion": "delta-rs.0.17.1"
+  }
+}

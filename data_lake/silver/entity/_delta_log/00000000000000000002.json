@@ -1,0 +1,42 @@
+{
+  "remove": {
+    "path": "year=2024/month=02/day=01/0-85f61f94-7ead-41af-b961-0578e186e7fd-0.parquet",
+    "dataChange": true,
+    "deletionTimestamp": 1716809491929,
+    "extendedFileMetadata": true,
+    "partitionValues": {
+      "month": "02",
+      "year": "2024",
+      "day": "01"
+    },
+    "size": 4526
+  }
+}
+{
+  "commitInfo": {
+    "timestamp": 1716809491929,
+    "operation": "MERGE",
+    "operationParameters": {
+      "mergePredicate": "t.year = s.year AND t.month = s.month AND t.day = s.day",
+      "notMatchedPredicates": "[]",
+      "predicate": "year = '2024' AND month = '02' AND day = '01'",
+      "matchedPredicates": "[{\"actionType\":\"delete\"}]",
+      "notMatchedBySourcePredicates": "[]"
+    },
+    "readVersion": 1,
+    "operationMetrics": {
+      "execution_time_ms": 28,
+      "num_output_rows": 0,
+      "num_source_rows": 1,
+      "num_target_files_added": 0,
+      "num_target_files_removed": 1,
+      "num_target_rows_copied": 0,
+      "num_target_rows_deleted": 18,
+      "num_target_rows_inserted": 0,
+      "num_target_rows_updated": 0,
+      "rewrite_time_ms": 4,
+      "scan_time_ms": 0
+    },
+    "clientVersion": "delta-rs.0.17.1"
+  }
+}
