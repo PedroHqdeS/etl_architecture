@@ -26,6 +26,7 @@ def init():
     # Instantiation of connectors according to
     # the file that will be worked on for Bronze
     local_source = LocalSource(
+        url="./datasets",
         processing_date={
             "updated_at": processing_date.strftime("%Y-%m-%d")
         }

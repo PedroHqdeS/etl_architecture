@@ -6,6 +6,17 @@ from connectors.base.file_format_connector import FileFormatConnector
 
 
 class DeltaConnector(FileFormatConnector):
+    """
+    Component that defines the behavior in how extract and write
+    data as Delta format in any Data Lake's layer.
+
+    Parameters
+    ----------
+    partition_dict: dict
+        Key containing the name of DataFrame columns by which data will
+        be partitioned. Value containing the value of a partition for
+        read operation.
+    """
     def __init__(self, partition_dict: dict=None):
         super().__init__()
         self._file_format = "delta"
@@ -13,29 +24,81 @@ class DeltaConnector(FileFormatConnector):
             partition_dict=partition_dict
         )
 
-    def _validate_partition(self, partition_dict: dict):
+    def _validate_partition(self, partition_dict: dict) -> dict:
+        """
+        In case a non-empty dict is passed as parameter,
+        it must validate if it is a valid dict, which
+        must not have the key or value empty or equals
+        to None.
+
+        Parameters
+        ----------
+        partition_dict: dict
+            Key containing the name of DataFrame columns by which data will
+            be partitioned. Value containing the value of a partition for
+            read operation.
+
+        Returns
+        -------
+        dict
+        """
         for key, value in partition_dict.items():
-            if key == "" or value == "":
+            if key is None or value is None or key == "" or value == "":
                 raise ValueError(
                     "Dict key and value cannot be ''(empty).")
         return partition_dict
 
-    def _get_partitions(self):
-        partition = []
+    def _get_partitions(self) -> List:
+        """
+        Transforms the dict containing the partition values in a list
+        of tuples, which is accepted by Polars to read a partitioned
+        Delta source.
+
+        Returns
+        -------
+        List
+        """
+        partitions = []
         for key, value in self._partition_dict.items():
             if value != "*":
-                partition.append((key, "=", value))
-        return partition
+                partitions.append((key, "=", value))
+        return partitions
 
     def _detele_from_partitions(self,
                                 partitions: List[str],
                                 dataframe: pl.DataFrame,
                                 path: str) -> None:
+        """
+        It will delete data from the target according to the value
+        of the partition columns of the data being received. This
+        operation is applied as a part of the aim to overwrite only
+        certain data partitions that is receiving new data. For this,
+        it uses merge to match the data that must be deleted.
 
+        Parameters
+        ----------
+        partitions: List[str]
+            Contains the name of DataFrame columns by which data is
+            partitioned.
+        dataframe: DataFrame
+            Contains new data being writen in Data Lake.
+        path: str
+            Data Lake's path of data that will be overwritten.
+
+        Returns
+        -------
+        None
+        """
+        # Create the predicate according the partitions
+        # of the Delta target
         predicate = " and ".join(
             [f"t.{item} == s.{item}" for item in partitions]
         )
+        # Guarantees distinct values for the DataFrame columns used
+        # to partition the data. Thus, the delete operation will
+        # perform without errors
         partition_to_delete = dataframe.select(*partitions).unique()
+        # Deletes partitions that match with data being received
         (partition_to_delete.write_delta(
             target=path,
             mode="merge",
@@ -49,6 +112,20 @@ class DeltaConnector(FileFormatConnector):
         .execute())
 
     def extract_data(self, path: str) -> pl.DataFrame:
+        """
+        Extracts data in Delta format from the Data Lake's layer.
+        If the path passed as parameter does not exist, it will
+        return an empty dataframe.
+
+        Parameters
+        ----------
+        path: str
+            Data Lake's path from where data will be extracted.
+
+        Returns
+        -------
+        DataFrame
+        """
         self._logger.info(msg=f"Extracting data from '{path}' ...")
         try:
             dataframe = pl.from_arrow(
@@ -66,6 +143,25 @@ class DeltaConnector(FileFormatConnector):
         return dataframe
 
     def load_data(self, dataframe: pl.DataFrame, path: str) -> None:
+        """
+        Writes data as Delta format in any Data Lake's layer.
+        If the DataFrame passed as parameter is empty, it will
+        not write anything. The writing operation performs
+        overwriting all existing data, or if the target is
+        partitioned it will overwrite only the partitions which
+        their values match with the new data.
+
+        Parameters
+        ----------
+        dataframe: DataFrame
+            Contains the data will be stored.
+        path: str
+            Data Lake's path where data will be stored.
+
+        Returns
+        -------
+        None
+        """
         self._logger.info(msg=f"Writing data in {path} ...")
         if not dataframe.is_empty():
             write_mode = "overwrite"
