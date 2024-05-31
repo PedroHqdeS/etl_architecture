@@ -1,5 +1,5 @@
-from datetime import datetime
 import polars as pl
+from datetime import datetime
 from utils.logging_utils import get_logger
 from connectors.csv_connector import CsvConnector
 from connectors.delta_connector import DeltaConnector
@@ -14,7 +14,7 @@ from pipelines.silver_to_gold_pipeline import SilverToGoldPipeline
 
 def init():
     processing_date = (
-        datetime.strptime("2024-02-02", "%Y-%m-%d"))
+        datetime.strptime("2024-02-01", "%Y-%m-%d"))
     logger = get_logger(name=__name__)
 
     # Initializing Bronze Layer
@@ -59,6 +59,7 @@ def init():
         }
     )
     cast_map = {
+        "id": pl.UInt8,
         "quantity": pl.UInt8,
         "created_at": pl.Datetime,
         "updated_at": pl.Datetime
