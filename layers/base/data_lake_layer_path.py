@@ -6,8 +6,8 @@ from utils.logging_utils import get_logger
 class DataLakeLayerPath(ABC):
     """
     Base code defining the responsibilities of a
-    component to define and standardize the path
-    patterns for Data Lake's layers.
+    component to standardize the path patterns
+    for Data Lake's layers.
 
     Parameters
     ----------

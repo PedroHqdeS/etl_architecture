@@ -69,7 +69,8 @@ def init():
         bronze_path=bronze_layer,
         target_connector=silver_delta,
         silver_path=silver_layer,
-        cast_map=cast_map
+        cast_map=cast_map,
+        processing_date=processing_date
     )
     bronze_to_silver.start_ingestion()
     logger.info(msg="Success!")

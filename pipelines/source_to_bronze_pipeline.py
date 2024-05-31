@@ -6,10 +6,26 @@ from pipelines.base.data_pipeline import DataPipeline
 
 
 class SourceToBronzePipeline(DataPipeline):
+    """
+    Component to standardize the data processing from
+    any external source to Data Lake's Bronze Layer.
+
+    Parameters
+    ----------
+    source_connector: ExternalSource
+        Component that connects and extracts data from any external
+        source.
+    target_connector: FileFormatConnector
+        Component that connects and writes data in any Data Lake's layer
+        in any needed format.
+    bronze_path: BronzeLayerPath
+        Component that define and standardize the path patterns
+        for Bronze Layer in Data Lake.
+    """
     def __init__(self,
                  source_connector: ExternalSource,
-                 bronze_path: BronzeLayerPath,
-                 target_connector: FileFormatConnector):
+                 target_connector: FileFormatConnector,
+                 bronze_path: BronzeLayerPath):
         super().__init__(
             source_connector=source_connector,
             source_layer=None,
@@ -18,4 +34,13 @@ class SourceToBronzePipeline(DataPipeline):
         )
 
     def extract(self) -> pl.DataFrame:
+        """
+        Method to extract data from external sources.
+        The source component must have the method
+        'extract_data' implemented.
+
+        Returns
+        ----------
+        DataFrame
+        """
         return self._source_connector.extract_data()

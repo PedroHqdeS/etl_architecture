@@ -83,7 +83,7 @@ class DeltaConnector(FileFormatConnector):
         dataframe: DataFrame
             Contains new data being writen in Data Lake.
         path: str
-            Data Lake's path of data that will be overwritten.
+            Data Lake's path of data that will be overridden.
 
         Returns
         -------
@@ -170,7 +170,7 @@ class DeltaConnector(FileFormatConnector):
                 "partition_by": partitions
             }
             if os.path.exists(path) and len(partitions) > 0:
-                # Only existing partitions will be overwritten
+                # Only existing partitions will be overridden
                 self._logger.info(msg=f"Overwriting existing partitions ...")
                 self._detele_from_partitions(
                     partitions=partitions,
