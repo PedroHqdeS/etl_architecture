@@ -5,8 +5,8 @@ from utils.logging_utils import get_logger
 
 class FileFormatConnector(ABC):
     """
-    Base defining the responsibilities of a component to
-    extract and write data from any Data Lake's layer in
+    Base code defining the responsibilities of a component
+    to extract and write data from any Data Lake's layer in
     any needed format.
     """
     def __init__(self):

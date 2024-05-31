@@ -5,8 +5,8 @@ from utils.logging_utils import get_logger
 
 class ExternalSource(ABC):
     """
-    Base defining the responsibilities of a component to
-    connect and extract data from any external source.
+    Base code defining the responsibilities of a component
+    to connect and extract data from any external source.
 
     Parameters
     ----------
