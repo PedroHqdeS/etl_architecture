@@ -6,7 +6,7 @@ from utils.logging_utils import get_logger
 class FileFormatConnector(ABC):
     """
     Base code defining the responsibilities of a component
-    to extract and write data from any Data Lake's layer in
+    to extract and write data in any Data Lake's layer in
     any needed format.
     """
     def __init__(self):
@@ -17,8 +17,8 @@ class FileFormatConnector(ABC):
     def extract_data(self, path: str) -> pl.DataFrame:
         """
         This method must be implemented to
-        extract data from the Data Lake's layer
-        according the format of the data stored.
+        extract data from a Data Lake's layer
+        according the format of data stored.
 
         Parameters
         ----------
@@ -35,7 +35,7 @@ class FileFormatConnector(ABC):
     def load_data(self, dataframe: pl.DataFrame, path: str) -> None:
         """
         This method must be implemented to
-        write data in the Data Lake's layer
+        write data in a Data Lake's layer
         according the desired format to store.
 
         Parameters

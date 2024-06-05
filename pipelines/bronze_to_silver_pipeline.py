@@ -23,8 +23,8 @@ class BronzeToSilverPipeline(DataPipeline):
         Component that define and standardize the path patterns
         for Bronze Layer in Data Lake.
     target_connector: DeltaConnector
-        Component that defines the behavior in how extract and write
-        data as Delta format in any Data Lake's layer.
+        Component that defines the behavior in how writing
+        data as Delta format in Data Lake's Silver layer.
     silver_path: SilverLayerPath
         Component that define and standardize the path patterns
         for Silver Layer in Data Lake.

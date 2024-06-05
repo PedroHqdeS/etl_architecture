@@ -14,7 +14,7 @@ class CsvConnector(FileFormatConnector):
 
     def extract_data(self, path: str) -> pl.DataFrame:
         """
-        Extracts data in CSV format from the Data Lake's layer.
+        Extracts data in CSV format from a Data Lake's layer.
         If the path passed as parameter does not exist, it will
         return an empty dataframe.
 

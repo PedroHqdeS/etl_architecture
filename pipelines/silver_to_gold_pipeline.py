@@ -13,14 +13,14 @@ class SilverToGoldPipeline(DataPipeline):
     Parameters
     ----------
     source_connector: DeltaConnector
-        Component that defines the behavior in how extract and write
-        data as Delta format in any Data Lake's layer.
+        Component that defines the behavior in how extracting
+        data in Delta format from Data Lake's Silver layer.
     silver_path: SilverLayerPath
         Component that define and standardize the path patterns
         for Silver Layer in Data Lake.
     target_connector: DeltaConnector
-        Component that defines the behavior in how extract and write
-        data as Delta format in any Data Lake's layer.
+        Component that defines the behavior in how writing
+        data as Delta format in Data Lake's Gold layer.
     gold_path: GoldLayerPath
         Component that define and standardize the path patterns
         for Gold Layer in Data Lake.

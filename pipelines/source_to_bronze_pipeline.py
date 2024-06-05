@@ -16,7 +16,7 @@ class SourceToBronzePipeline(DataPipeline):
         Component that connects and extracts data from any external
         source.
     target_connector: FileFormatConnector
-        Component that connects and writes data in any Data Lake's layer
+        Component that write data in Data Lake's Bronze layer
         in any needed format.
     bronze_path: BronzeLayerPath
         Component that define and standardize the path patterns

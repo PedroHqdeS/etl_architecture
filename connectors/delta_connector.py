@@ -13,8 +13,8 @@ class DeltaConnector(FileFormatConnector):
     Parameters
     ----------
     partition_dict: dict
-        Key containing the name of DataFrame columns by which data will
-        be partitioned. Value containing the value of a partition for
+        Key(s) containing the name of DataFrame columns by which data will
+        be partitioned. Value(s) containing the value of a partition for
         read operation.
     """
     def __init__(self, partition_dict: dict=None):
@@ -34,8 +34,8 @@ class DeltaConnector(FileFormatConnector):
         Parameters
         ----------
         partition_dict: dict
-            Key containing the name of DataFrame columns by which data will
-            be partitioned. Value containing the value of a partition for
+            Key(s) containing the name of DataFrame columns by which data will
+            be partitioned. Value(s) containing the value of a partition for
             read operation.
 
         Returns
@@ -45,14 +45,14 @@ class DeltaConnector(FileFormatConnector):
         for key, value in partition_dict.items():
             if key is None or value is None or key == "" or value == "":
                 raise ValueError(
-                    "Dict key and value cannot be ''(empty).")
+                    "Dict key and value cannot be None or ''(empty).")
         return partition_dict
 
     def _get_partitions(self) -> List:
         """
         Transforms the dict containing the partition values in a list
         of tuples, which is accepted by Polars to read a partitioned
-        Delta source.
+        source.
 
         Returns
         -------
@@ -99,21 +99,22 @@ class DeltaConnector(FileFormatConnector):
         # perform without errors
         partition_to_delete = dataframe.select(*partitions).unique()
         # Deletes partitions that match with data being received
-        (partition_to_delete.write_delta(
-            target=path,
-            mode="merge",
-            delta_merge_options={
-                "predicate": predicate,
-                "source_alias": "s",
-                "target_alias": "t"
-            }
-        )
-        .when_matched_delete()
-        .execute())
+        (partition_to_delete
+            .write_delta(
+                target=path,
+                mode="merge",
+                delta_merge_options={
+                    "predicate": predicate,
+                    "source_alias": "s",
+                    "target_alias": "t"
+                }
+            )
+            .when_matched_delete()
+            .execute())
 
     def extract_data(self, path: str) -> pl.DataFrame:
         """
-        Extracts data in Delta format from the Data Lake's layer.
+        Extracts data in Delta format from a Data Lake's layer.
         If the path passed as parameter does not exist, it will
         return an empty dataframe.
 
@@ -146,10 +147,10 @@ class DeltaConnector(FileFormatConnector):
         """
         Writes data as Delta format in any Data Lake's layer.
         If the DataFrame passed as parameter is empty, it will
-        not write anything. The writing operation performs
-        overwriting all existing data, or if the target is
-        partitioned it will overwrite only the partitions which
-        their values match with the new data.
+        not write anything. The writing operation overwrites all
+        existing data, or if the target is partitioned it will
+        overwrite only the partitions which their values match
+        with the new data.
 
         Parameters
         ----------
