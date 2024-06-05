@@ -1,10 +1,24 @@
-# ETL using Polars
+<p align="justify">
 
-This project performs an ETL (Extract, Transform, Load) process using the
-Polars library. The data flow is structured into three basic parts: 
-- Source -> Bronze
-- Bronze -> Silver
-- Silver -> Gold
+# ETL using Polars
+This project performs an exemplification of an ETL (Extract, Transform, Load)
+process on data using the Polars library. For this, data is extracted from some
+source, in this case a local source to exemplify, transformed where some rules
+are applied to enhance it and then stored ready for being consumed.
+
+During the transformation process, data goes through some layers into which the
+Data Lake is divided. Thus, the ETL flow is structured into three basic parts: 
+- Source       -> Bronze Layer
+- Bronze Layer -> Silver Layer
+- Silver Layer -> Gold Layer
+
+Each layer have their own rules, which are explained in the next section. The
+main objective of this process is make available in the last layer reliable
+data that can be used for the final user.
+
+In the last section of this documentation the structure of the developed code,
+as well as its modules division, that together will perform all the ELT process
+is explained.
 
 # Layer Rules
 In order to have a structured and standardized Data Lake, which is reliable for
@@ -39,7 +53,7 @@ i.e., Gold represents the current state of data, where data is clean, reliable
 and ready to use.
 
 # Code Structure
-The developed code follows the below structure: 
+The developed code to perform the ETL process follows the below structure: 
 ```
 └── etl_architecture
 |    └── connectors
@@ -82,3 +96,5 @@ transformations defined for each layer.
   this directory as superclasses.
 - **utils:** Contains helpful and general code that can be used by all
 components described above.
+
+</p>
