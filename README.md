@@ -20,7 +20,7 @@ In the last section of this documentation the structure of the developed code,
 as well as its modules division, that together will perform all the ELT process
 is explained.
 
-# Layer Rules
+## Layer Rules
 In order to have a structured and standardized Data Lake, which is reliable for
 data consuming, it was defined splitting the data treatment and enhancement in
 some layers, defining the rules must be applied in data stored there.
@@ -52,7 +52,7 @@ Silver data should be partitioned by this reference date (year, month and day);
 i.e., Gold represents the current state of data, where data is clean, reliable
 and ready to use.
 
-# Code Structure
+## Code Structure
 The developed code to perform the ETL process follows the below structure: 
 ```
 └── etl_architecture
