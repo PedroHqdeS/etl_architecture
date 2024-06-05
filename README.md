@@ -3,8 +3,8 @@
 # ETL using Polars
 This project performs an exemplification of an ETL (Extract, Transform, Load)
 process on data using the Polars library. For this, data is extracted from some
-source, in this case a local source to exemplify, transformed where some rules
-are applied to enhance it and then stored ready for being consumed.
+source, in this case a local source to exemplify, transformed applying some
+rules to enhance it and then stored ready for being consumed.
 
 During the transformation process, data goes through some layers into which the
 Data Lake is divided. Thus, the ETL flow is structured into three basic parts: 
@@ -13,7 +13,7 @@ Data Lake is divided. Thus, the ETL flow is structured into three basic parts:
 - Silver Layer -> Gold Layer
 
 Each layer have their own rules, which are explained in the next section. The
-main objective of this process is make available in the last layer reliable
+main objective of this process is making available in the last layer reliable
 data that can be used for the final user.
 
 In the last section of this documentation the structure of the developed code,
@@ -32,13 +32,13 @@ The layers and rules for each one follows the below structure:
 - In Bronze, no rules or transformations should be applied, i.e, Bronze data
 must be a mirror of what is in the source;
 - We must have the same vision as data in the source, for instance, if the
-source shows data in a tabular way (Relational databases, Excel, etc.) data
+source shows data in a tabular form (Relational databases, Excel, etc.) data
 must be stored in a structured form like *parquet* type;
 - As data is processed in an incremental way according to a reference date,
 Bronze data should be partitioned by this reference date (year, month and day).
 However, it is probably that we do not have a cleaned date attribute to apply
-the partitioning operation. So, to avoid apply any transformation in data here
-the partitioning must occurs in the object name.
+the partitioning operation. So, to avoid applying any transformation in data
+here the partitioning must occurs in the object path in Data Lake.
 ### Silver
 - Receives data coming from Bronze Layer;
 - Data in Silver must be totally structured;
@@ -88,7 +88,7 @@ structuring the path patterns for Data Lake's layers.
   paths for entities within the Data Lake and are placed inside *layers* must
   have the classes in this directory as superclasses.
 - **pipelines:** Contains the components responsible for standardizing the data
-processing flow through Data Lake's layers as well applying rules and
+processing flow through Data Lake's layers as well as applying rules and
 transformations defined for each layer.
   - **base:** Base code defining the responsibilities and behaviors described
   above. All components that will perform tasks that involve data manipulations
