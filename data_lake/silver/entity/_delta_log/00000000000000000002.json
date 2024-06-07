@@ -1,31 +1,31 @@
 {
   "remove": {
-    "path": "year=2024/month=02/day=01/0-85f61f94-7ead-41af-b961-0578e186e7fd-0.parquet",
+    "path": "year=2024/month=02/day=01/0-3c124e61-24f6-4d24-a301-ae2a9810187a-0.parquet",
     "dataChange": true,
-    "deletionTimestamp": 1716809491929,
+    "deletionTimestamp": 1717759024460,
     "extendedFileMetadata": true,
     "partitionValues": {
-      "month": "02",
       "year": "2024",
-      "day": "01"
+      "day": "01",
+      "month": "02"
     },
-    "size": 4526
+    "size": 4475
   }
 }
 {
   "commitInfo": {
-    "timestamp": 1716809491929,
+    "timestamp": 1717759024460,
     "operation": "MERGE",
     "operationParameters": {
       "mergePredicate": "t.year = s.year AND t.month = s.month AND t.day = s.day",
-      "notMatchedPredicates": "[]",
-      "predicate": "year = '2024' AND month = '02' AND day = '01'",
       "matchedPredicates": "[{\"actionType\":\"delete\"}]",
-      "notMatchedBySourcePredicates": "[]"
+      "notMatchedBySourcePredicates": "[]",
+      "predicate": "year = '2024' AND month = '02' AND day = '01'",
+      "notMatchedPredicates": "[]"
     },
     "readVersion": 1,
     "operationMetrics": {
-      "execution_time_ms": 28,
+      "execution_time_ms": 25,
       "num_output_rows": 0,
       "num_source_rows": 1,
       "num_target_files_added": 0,

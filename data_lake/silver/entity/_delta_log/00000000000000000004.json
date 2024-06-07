@@ -1,28 +1,29 @@
 {
   "remove": {
-    "path": "year=2024/month=02/day=02/part-00001-c9c0e07f-5ab4-43ee-8391-ed6e8c3e3d75-c000.snappy.parquet",
+    "path": "year=2024/month=02/day=02/part-00001-081c40c5-705d-4621-898d-7624833e79e6-c000.snappy.parquet",
     "dataChange": true,
-    "deletionTimestamp": 1716809731549,
+    "deletionTimestamp": 1717759234293,
     "extendedFileMetadata": true,
     "partitionValues": {
       "day": "02",
       "month": "02",
       "year": "2024"
     },
-    "size": 3905
+    "size": 3858
   }
 }
 {
   "commitInfo": {
-    "timestamp": 1716809731549,
+    "timestamp": 1717759234293,
     "operation": "MERGE",
     "operationParameters": {
-      "notMatchedPredicates": "[]",
-      "predicate": "year = '2024' AND month = '02' AND day = '02'",
       "matchedPredicates": "[{\"actionType\":\"delete\"}]",
       "mergePredicate": "t.year = s.year AND t.month = s.month AND t.day = s.day",
-      "notMatchedBySourcePredicates": "[]"
+      "notMatchedBySourcePredicates": "[]",
+      "notMatchedPredicates": "[]",
+      "predicate": "year = '2024' AND month = '02' AND day = '02'"
     },
+    "readVersion": 3,
     "clientVersion": "delta-rs.0.17.1",
     "operationMetrics": {
       "execution_time_ms": 26,
@@ -34,9 +35,8 @@
       "num_target_rows_deleted": 5,
       "num_target_rows_inserted": 0,
       "num_target_rows_updated": 0,
-      "rewrite_time_ms": 3,
+      "rewrite_time_ms": 2,
       "scan_time_ms": 0
-    },
-    "readVersion": 3
+    }
   }
 }

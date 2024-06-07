@@ -1,36 +1,3 @@
-{
-  "add": {
-    "path": "1-5af2270b-fabb-450b-9ead-d9d3d97a95b9-0.parquet",
-    "partitionValues": {},
-    "size": 4592,
-    "modificationTime": 1716808754116,
-    "dataChange": true,
-    "stats": "{\"numRecords\": 5, \"minValues\": {\"id\": 18, \"order_description\": \"Beer A 1l\", \"quantity\": 5, \"status\": \"Canceled\", \"created_at\": \"2024-02-01T13:30:00\", \"updated_at\": \"2024-02-01T14:45:00\", \"surrogate_key\": \"0800fb84-824a-4ce8-95ce-f402b13d6dad\", \"data_lake_load_at\": \"2024-05-27T08:11:12.516559\", \"year\": \"2024\", \"month\": \"02\", \"day\": \"01\"}, \"maxValues\": {\"id\": 23, \"order_description\": \"Sparkling water 300ml\", \"quantity\": 24, \"status\": \"Delivered\", \"created_at\": \"2024-02-01T14:20:00\", \"updated_at\": \"2024-02-02T11:00:34\", \"surrogate_key\": \"d49a48e2-6357-487b-b6cf-aa612c0c21c9\", \"data_lake_load_at\": \"2024-05-27T08:19:14.020639\", \"year\": \"2024\", \"month\": \"02\", \"day\": \"02\"}, \"nullCount\": {\"id\": 0, \"order_description\": 0, \"quantity\": 0, \"status\": 0, \"created_at\": 0, \"updated_at\": 0, \"surrogate_key\": 0, \"data_lake_load_at\": 0, \"year\": 0, \"month\": 0, \"day\": 0}}",
-    "tags": null,
-    "deletionVector": null,
-    "baseRowId": null,
-    "defaultRowCommitVersion": null,
-    "clusteringProvider": null
-  }
-}
-{
-  "remove": {
-    "path": "0-c98c7d81-9c23-4ecb-ac90-2d5785860e0b-0.parquet",
-    "dataChange": true,
-    "deletionTimestamp": 1716808754117,
-    "extendedFileMetadata": true,
-    "partitionValues": {},
-    "size": 4602
-  }
-}
-{
-  "commitInfo": {
-    "timestamp": 1716808754117,
-    "operation": "WRITE",
-    "operationParameters": {
-      "mode": "Overwrite",
-      "partitionBy": "[]"
-    },
-    "clientVersion": "delta-rs.0.17.1"
-  }
-}
+{"add":{"path":"1-f989700d-3c10-466d-8a77-613da376c52a-0.parquet","partitionValues":{},"size":4541,"modificationTime":1717758772563,"dataChange":true,"stats":"{\"numRecords\": 5, \"minValues\": {\"id\": 18, \"order_description\": \"Beer A 1l\", \"quantity\": 5, \"status\": \"Canceled\", \"created_at\": \"2024-02-01T13:30:00\", \"updated_at\": \"2024-02-01T14:45:00\", \"surrogate_key\": \"13e1bdeb-e05b-4c43-af26-cce2280a1005\", \"data_lake_load_at\": \"2024-06-07T08:07:23.651026\", \"year\": \"2024\", \"month\": \"02\", \"day\": \"01\"}, \"maxValues\": {\"id\": 23, \"order_description\": \"Sparkling water 300ml\", \"quantity\": 24, \"status\": \"Delivered\", \"created_at\": \"2024-02-01T14:20:00\", \"updated_at\": \"2024-02-02T11:00:34\", \"surrogate_key\": \"dd3d9cf4-bbe9-4b72-a285-e7354c8611d6\", \"data_lake_load_at\": \"2024-06-07T08:12:52.363178\", \"year\": \"2024\", \"month\": \"02\", \"day\": \"02\"}, \"nullCount\": {\"id\": 0, \"order_description\": 0, \"quantity\": 0, \"status\": 0, \"created_at\": 0, \"updated_at\": 0, \"surrogate_key\": 0, \"data_lake_load_at\": 0, \"year\": 0, \"month\": 0, \"day\": 0}}","tags":null,"deletionVector":null,"baseRowId":null,"defaultRowCommitVersion":null,"clusteringProvider":null}}
+{"remove":{"path":"0-2e9fd440-8de1-47ad-b70d-75f4780e96f8-0.parquet","dataChange":true,"deletionTimestamp":1717758772564,"extendedFileMetadata":true,"partitionValues":{},"size":4551}}
+{"commitInfo":{"timestamp":1717758772564,"operation":"WRITE","operationParameters":{"mode":"Overwrite","partitionBy":"[]"},"clientVersion":"delta-rs.0.17.1"}}
